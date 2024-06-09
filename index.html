@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device and Use Case Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Device and Use Case Calculator</h1>
+        <div class="calculator">
+            <div class="dropdowns">
+                <label for="device">Select Device:</label>
+                <select id="device">
+                    <option value="ipad_air_11">2024 iPad Air 11"</option>
+                    <option value="ipad_pro_11">2024 iPad Pro 11"</option>
+                    <option value="lenovo_duet_10">Lenovo Chromebook Duet 10.1"</option>
+                </select>
+            </div>
+            <div class="dropdowns">
+                <label for="use_case">Select Use Case:</label>
+                <select id="use_case">
+                    <option value="single_page">Single Page Superhero Comic</option>
+                    <option value="dual_page_portrait">Dual Page Portrait Superhero Comic</option>
+                    <option value="dual_page_landscape">Dual Page Landscape Superhero Comic</option>
+                </select>
+            </div>
+            <div class="results">
+                <h2>Results</h2>
+                <p id="effective_screen_size">Effective Screen Size: </p>
+                <p id="font_size">10pt Font Size: </p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
