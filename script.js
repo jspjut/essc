@@ -55,18 +55,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             function updateResult(resultId, device, useCase) {
-                const effectiveScreenSize = calculateEffectiveScreenSize(device, useCase.aspectRatio);
-                const fontSize = calculateFontSize(device, useCase.aspectRatio);
+                const effectiveScreenSize = calculateEffectiveScreenSize(device, useCase.aspectRatio, useCase.orientation);
+                const fontSize = calculateFontSize(device, useCase.aspectRatio, useCase.orientation);
                 document.getElementById(resultId).innerHTML = `Effective Screen Size: ${effectiveScreenSize.toFixed(2)}"<br>10pt Font Size: ${fontSize.toFixed(2)}px`;
             }
 
-            function calculateEffectiveScreenSize(device, aspectRatio) {
+            function calculateEffectiveScreenSize(device, aspectRatio, orientation) {
                 let effectiveWidth, effectiveHeight;
-                if (aspectRatio === 1.29) {
+                if (orientation === 'landscape') {
                     effectiveWidth = device.width;
-                    effectiveHeight = device.height / 2;
+                    effectiveHeight = device.height / aspectRatio;
                 } else {
-                    effectiveWidth = device.width / 2;
+                    effectiveWidth = device.width / aspectRatio;
                     effectiveHeight = device.height;
                 }
                 const diagonalPixels = Math.sqrt(Math.pow(device.width, 2) + Math.pow(device.height, 2));
@@ -75,10 +75,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return Math.sqrt(Math.pow(effectiveWidth, 2) + Math.pow(effectiveHeight, 2)) / pixelsPerInch;
             }
 
-            function calculateFontSize(device, aspectRatio) {
+            function calculateFontSize(device, aspectRatio, orientation) {
                 let effectiveHeight;
-                if (aspectRatio === 1.29) {
-                    effectiveHeight = device.height / 2;
+                if (orientation === 'landscape') {
+                    effectiveHeight = device.height / aspectRatio;
                 } else {
                     effectiveHeight = device.height;
                 }
