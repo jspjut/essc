@@ -1,10 +1,10 @@
 {
     "devices": [
-        { "id": "ipad_air_11", "name": "2024 iPad Air 11\"", "width": 2360, "height": 1640, "diagonal": 10.86 },
-        { "id": "ipad_pro_11", "name": "2024 iPad Pro 11\"", "width": 2420, "height": 1668, "diagonal": 11.1 },
+        { "id": "ipad_pro_11_7", "name": "iPad Pro 11\" (7th gen)", "width": 2420, "height": 1668, "diagonal": 11.1 },
+        { "id": "ipad_air_11_6", "name": "iPad Air 11\" (6th gen)", "width": 2360, "height": 1640, "diagonal": 10.86 },
         { "id": "lenovo_duet_10", "name": "Lenovo Chromebook Duet 10.1\"", "width": 1920, "height": 1200, "diagonal": 10.1 },
-        { "id": "ipad_air_13", "name": "2024 iPad Air 13\"", "width": 2732, "height": 2048, "diagonal": 12.9 },
-        { "id": "ipad_pro_13", "name": "2024 iPad Pro 13\"", "width": 2752, "height": 2064, "diagonal": 13 }
+        { "id": "ipad_air_13_6", "name": "iPad Air 13\" (6th gen)", "width": 2732, "height": 2048, "diagonal": 12.9 },
+        { "id": "ipad_pro_13_7", "name": "iPad Pro 13\" (7th gen)", "width": 2752, "height": 2064, "diagonal": 13 }
     ],
     "useCases": [
         { "id": "single_page", "name": "Single Page Superhero Comic", "aspectRatio": 0.645, "deviceOrientation": "portrait", "tenptSizeRatio": 0.0132275 },
