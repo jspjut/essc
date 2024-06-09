@@ -29,9 +29,15 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+    vertical-align: middle;
 }
 
 th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.row-header {
     background-color: #f2f2f2;
     font-weight: bold;
 }
@@ -42,4 +48,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
+    white-space: normal; /* Allow text to wrap */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
 }
