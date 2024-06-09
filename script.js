@@ -69,7 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     effectiveWidth = device.width / 2;
                     effectiveHeight = device.height;
                 }
-                return Math.sqrt(Math.pow(effectiveWidth, 2) + Math.pow(effectiveHeight, 2)) / 264;
+                const diagonalPixels = Math.sqrt(Math.pow(device.width, 2) + Math.pow(device.height, 2));
+                const diagonalInches = device.diagonal;
+                const pixelsPerInch = diagonalPixels / diagonalInches;
+                return Math.sqrt(Math.pow(effectiveWidth, 2) + Math.pow(effectiveHeight, 2)) / pixelsPerInch;
             }
 
             function calculateFontSize(device, aspectRatio) {
@@ -79,7 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     effectiveHeight = device.height;
                 }
-                return (10 / 72) * 96 * (effectiveHeight / device.height);
+                const diagonalPixels = Math.sqrt(Math.pow(device.width, 2) + Math.pow(device.height, 2));
+                const diagonalInches = device.diagonal;
+                const pixelsPerInch = diagonalPixels / diagonalInches;
+                return (10 / 72) * 96 * (effectiveHeight / device.height) * pixelsPerInch / 96;
             }
 
             deviceInputs.concat(useCaseInputs).forEach(id => {
