@@ -9,67 +9,78 @@
 <body>
     <div class="container">
         <h1>Device and Use Case Calculator</h1>
-        <div class="calculator">
-            <div class="dropdowns">
-                <label for="device1">Select Device 1:</label>
-                <input type="text" id="device1Input" placeholder="Search for device..">
-                <select id="device1" class="dropdown-content">
-                    <option value="ipad_air_11">2024 iPad Air 11"</option>
-                    <option value="ipad_pro_11">2024 iPad Pro 11"</option>
-                    <option value="lenovo_duet_10">Lenovo Chromebook Duet 10.1"</option>
-                </select>
-            </div>
-            <div class="dropdowns">
-                <label for="device2">Select Device 2:</label>
-                <input type="text" id="device2Input" placeholder="Search for device..">
-                <select id="device2" class="dropdown-content">
-                    <option value="ipad_air_11">2024 iPad Air 11"</option>
-                    <option value="ipad_pro_11">2024 iPad Pro 11"</option>
-                    <option value="lenovo_duet_10">Lenovo Chromebook Duet 10.1"</option>
-                </select>
-            </div>
-            <div class="dropdowns">
-                <label for="device3">Select Device 3:</label>
-                <input type="text" id="device3Input" placeholder="Search for device..">
-                <select id="device3" class="dropdown-content">
-                    <option value="ipad_air_11">2024 iPad Air 11"</option>
-                    <option value="ipad_pro_11">2024 iPad Pro 11"</option>
-                    <option value="lenovo_duet_10">Lenovo Chromebook Duet 10.1"</option>
-                </select>
-            </div>
-            <div class="dropdowns">
-                <label for="use_case1">Select Use Case 1:</label>
-                <input type="text" id="use_case1Input" placeholder="Search for use case..">
-                <select id="use_case1" class="dropdown-content">
-                    <option value="single_page">Single Page Superhero Comic</option>
-                    <option value="dual_page_portrait">Dual Page Portrait Superhero Comic</option>
-                    <option value="dual_page_landscape">Dual Page Landscape Superhero Comic</option>
-                </select>
-            </div>
-            <div class="dropdowns">
-                <label for="use_case2">Select Use Case 2:</label>
-                <input type="text" id="use_case2Input" placeholder="Search for use case..">
-                <select id="use_case2" class="dropdown-content">
-                    <option value="single_page">Single Page Superhero Comic</option>
-                    <option value="dual_page_portrait">Dual Page Portrait Superhero Comic</option>
-                    <option value="dual_page_landscape">Dual Page Landscape Superhero Comic</option>
-                </select>
-            </div>
-            <div class="dropdowns">
-                <label for="use_case3">Select Use Case 3:</label>
-                <input type="text" id="use_case3Input" placeholder="Search for use case..">
-                <select id="use_case3" class="dropdown-content">
-                    <option value="single_page">Single Page Superhero Comic</option>
-                    <option value="dual_page_portrait">Dual Page Portrait Superhero Comic</option>
-                    <option value="dual_page_landscape">Dual Page Landscape Superhero Comic</option>
-                </select>
-            </div>
-            <div class="results">
-                <h2>Results</h2>
-                <p id="effective_screen_size">Effective Screen Size: </p>
-                <p id="font_size">10pt Font Size: </p>
-            </div>
-        </div>
+        <table class="calculator">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        <input type="text" id="device1Input" placeholder="Search for device..">
+                        <select id="device1" class="dropdown-content">
+                            <option value="ipad_air_11">2024 iPad Air 11"</option>
+                            <option value="ipad_pro_11">2024 iPad Pro 11"</option>
+                            <option value="lenovo_duet_10">Lenovo Chromebook Duet 10.1"</option>
+                        </select>
+                    </th>
+                    <th>
+                        <input type="text" id="device2Input" placeholder="Search for device..">
+                        <select id="device2" class="dropdown-content">
+                            <option value="ipad_air_11">2024 iPad Air 11"</option>
+                            <option value="ipad_pro_11">2024 iPad Pro 11"</option>
+                            <option value="lenovo_duet_10">Lenovo Chromebook Duet 10.1"</option>
+                        </select>
+                    </th>
+                    <th>
+                        <input type="text" id="device3Input" placeholder="Search for device..">
+                        <select id="device3" class="dropdown-content">
+                            <option value="ipad_air_11">2024 iPad Air 11"</option>
+                            <option value="ipad_pro_11">2024 iPad Pro 11"</option>
+                            <option value="lenovo_duet_10">Lenovo Chromebook Duet 10.1"</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" id="use_case1Input" placeholder="Search for use case..">
+                        <select id="use_case1" class="dropdown-content">
+                            <option value="single_page">Single Page Superhero Comic</option>
+                            <option value="dual_page_portrait">Dual Page Portrait Superhero Comic</option>
+                            <option value="dual_page_landscape">Dual Page Landscape Superhero Comic</option>
+                        </select>
+                    </td>
+                    <td id="result1"></td>
+                    <td id="result2"></td>
+                    <td id="result3"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="use_case2Input" placeholder="Search for use case..">
+                        <select id="use_case2" class="dropdown-content">
+                            <option value="single_page">Single Page Superhero Comic</option>
+                            <option value="dual_page_portrait">Dual Page Portrait Superhero Comic</option>
+                            <option value="dual_page_landscape">Dual Page Landscape Superhero Comic</option>
+                        </select>
+                    </td>
+                    <td id="result4"></td>
+                    <td id="result5"></td>
+                    <td id="result6"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="use_case3Input" placeholder="Search for use case..">
+                        <select id="use_case3" class="dropdown-content">
+                            <option value="single_page">Single Page Superhero Comic</option>
+                            <option value="dual_page_portrait">Dual Page Portrait Superhero Comic</option>
+                            <option value="dual_page_landscape">Dual Page Landscape Superhero Comic</option>
+                        </select>
+                    </td>
+                    <td id="result7"></td>
+                    <td id="result8"></td>
+                    <td id="result9"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script src="script.js"></script>
 </body>

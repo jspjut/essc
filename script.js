@@ -48,16 +48,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const useCase2 = useCases[document.getElementById('use_case2').value];
         const useCase3 = useCases[document.getElementById('use_case3').value];
 
-        const effectiveScreenSize1 = calculateEffectiveScreenSize(device1, useCase1);
-        const effectiveScreenSize2 = calculateEffectiveScreenSize(device2, useCase2);
-        const effectiveScreenSize3 = calculateEffectiveScreenSize(device3, useCase3);
+        updateResult('result1', device1, useCase1);
+        updateResult('result2', device2, useCase1);
+        updateResult('result3', device3, useCase1);
+        updateResult('result4', device1, useCase2);
+        updateResult('result5', device2, useCase2);
+        updateResult('result6', device3, useCase2);
+        updateResult('result7', device1, useCase3);
+        updateResult('result8', device2, useCase3);
+        updateResult('result9', device3, useCase3);
+    }
 
-        const fontSize1 = calculateFontSize(device1, useCase1);
-        const fontSize2 = calculateFontSize(device2, useCase2);
-        const fontSize3 = calculateFontSize(device3, useCase3);
-
-        document.getElementById('effective_screen_size').textContent = `Effective Screen Size: ${effectiveScreenSize1.toFixed(2)}", ${effectiveScreenSize2.toFixed(2)}", ${effectiveScreenSize3.toFixed(2)}"`;
-        document.getElementById('font_size').textContent = `10pt Font Size: ${fontSize1.toFixed(2)}px, ${fontSize2.toFixed(2)}px, ${fontSize3.toFixed(2)}px`;
+    function updateResult(resultId, device, aspectRatio) {
+        const effectiveScreenSize = calculateEffectiveScreenSize(device, aspectRatio);
+        const fontSize = calculateFontSize(device, aspectRatio);
+        document.getElementById(resultId).innerHTML = `Effective Screen Size: ${effectiveScreenSize.toFixed(2)}"<br>10pt Font Size: ${fontSize.toFixed(2)}px`;
     }
 
     function calculateEffectiveScreenSize(device, aspectRatio) {
