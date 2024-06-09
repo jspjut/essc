@@ -60,14 +60,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 const screenWaste = calculateScreenWaste(device, useCase.aspectRatio, useCase.deviceOrientation);
                 const deviceAspectRatio = calculateDeviceAspectRatio(device, useCase.deviceOrientation);
                 const contentAspectRatio = useCase.aspectRatio.toFixed(2);
-                document.getElementById(resultId).innerHTML = `
-                    Device Aspect Ratio: ${deviceAspectRatio}<br>
-                    Content Aspect Ratio: ${contentAspectRatio}<br>
-                    Effective Screen Size: ${effectiveScreenSize.toFixed(2)}"<br>
-                    10pt Font Size: ${fontSize.pixels.toFixed(2)}px (${fontSize.physical.toFixed(2)} inches)<br>
-                    Screen Waste: ${screenWaste.toFixed(2)}%
-                `;
+                const nativeScreenSize = device.diagonal;
+            
+                const resultContainer = document.getElementById(resultId);
+                resultContainer.innerHTML = ''; // Clear previous content
+            
+                const table = document.createElement('table');
+                table.style.borderCollapse = 'collapse';
+            
+                const row1 = table.insertRow();
+                const cell1_1 = row1.insertCell();
+                cell1_1.innerHTML = 'Device Aspect Ratio:';
+                const cell1_2 = row1.insertCell();
+                cell1_2.innerHTML = deviceAspectRatio;
+            
+                const row2 = table.insertRow();
+                const cell2_1 = row2.insertCell();
+                cell2_1.innerHTML = 'Content Aspect Ratio:';
+                const cell2_2 = row2.insertCell();
+                cell2_2.innerHTML = contentAspectRatio;
+            
+                const row6 = table.insertRow();
+                const cell6_1 = row6.insertCell();
+                cell6_1.innerHTML = 'Native Screen Size:';
+                const cell6_2 = row6.insertCell();
+                cell6_2.innerHTML = `${nativeScreenSize.toFixed(2)}"`;
+            
+                const row3 = table.insertRow();
+                const cell3_1 = row3.insertCell();
+                cell3_1.innerHTML = 'Effective Screen Size:';
+                const cell3_2 = row3.insertCell();
+                cell3_2.innerHTML = `${effectiveScreenSize.toFixed(2)}"`;
+            
+                const row5 = table.insertRow();
+                const cell5_1 = row5.insertCell();
+                cell5_1.innerHTML = 'Screen Waste:';
+                const cell5_2 = row5.insertCell();
+                cell5_2.innerHTML = `${screenWaste.toFixed(2)}%`;
+            
+                const row4 = table.insertRow();
+                const cell4_1 = row4.insertCell();
+                cell4_1.innerHTML = '10pt Font Size:';
+                const cell4_2 = row4.insertCell();
+                cell4_2.innerHTML = `${fontSize.pixels.toFixed(2)}px <br />${fontSize.physical.toFixed(2)}"`;
+            
+                resultContainer.appendChild(table);
             }
+            
 
             function calculateDeviceAspectRatio(device, deviceOrientation) {
                 if (deviceOrientation === 'landscape') {
@@ -79,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function calculateEffectiveScreenSize(device, aspectRatio, deviceOrientation) {
                 let effectiveWidth, effectiveHeight;
-                if (deviceOrientation === 'landscape') {
+                if (deviceOrientation === 'portrait') {
                     effectiveWidth = device.width;
                     effectiveHeight = device.width / aspectRatio;
                     if (effectiveHeight > device.height) {
@@ -102,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function calculateFontSize(device, aspectRatio, deviceOrientation) {
                 let effectiveHeight;
-                if (deviceOrientation === 'landscape') {
+                if (deviceOrientation === 'portrait') {
                     effectiveHeight = device.width / aspectRatio;
                     if (effectiveHeight > device.height) {
                         effectiveHeight = device.height;
