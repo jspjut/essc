@@ -14,32 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const deviceInputs = ['device1', 'device2', 'device3'];
     const useCaseInputs = ['use_case1', 'use_case2', 'use_case3'];
 
-    deviceInputs.forEach(id => {
-        document.getElementById(id + 'Input').addEventListener('keyup', function() {
-            filterFunction(id, this.value);
-        });
-    });
-
-    useCaseInputs.forEach(id => {
-        document.getElementById(id + 'Input').addEventListener('keyup', function() {
-            filterFunction(id, this.value);
-        });
-    });
-
-    function filterFunction(id, value) {
-        const filter = value.toUpperCase();
-        const select = document.getElementById(id);
-        const options = select.getElementsByTagName('option');
-        for (let i = 0; i < options.length; i++) {
-            const txtValue = options[i].textContent || options[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                options[i].style.display = "";
-            } else {
-                options[i].style.display = "none";
-            }
-        }
-    }
-
     function calculate() {
         const device1 = devices[document.getElementById('device1').value];
         const device2 = devices[document.getElementById('device2').value];

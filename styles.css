@@ -36,34 +36,10 @@ th {
     font-weight: bold;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: block;
+select {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
-}
-
-.dropdown-search {
-    display: none;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    margin-top: 5px;
-}
-
-.dropdown-content:focus + .dropdown-search {
-    display: block;
-}
-
-.dropdown-search:focus {
-    display: block;
 }
