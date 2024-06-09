@@ -98,11 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cell5_2 = row5.insertCell();
                 cell5_2.innerHTML = `${screenWaste.toFixed(2)}%`;
             
-                const row4 = table.insertRow();
-                const cell4_1 = row4.insertCell();
-                cell4_1.innerHTML = '10pt Font Size:';
-                const cell4_2 = row4.insertCell();
-                cell4_2.innerHTML = `${fontSize.pixels.toFixed(2)}px <br />${fontSize.physical.toFixed(2)}"`;
+                // const row4 = table.insertRow();
+                // const cell4_1 = row4.insertCell();
+                // cell4_1.innerHTML = '10pt Font Size:';
+                // const cell4_2 = row4.insertCell();
+                // cell4_2.innerHTML = `${fontSize.pixels.toFixed(2)}px <br />${fontSize.physical.toFixed(2)}"`;
             
                 resultContainer.appendChild(table);
             }
@@ -184,26 +184,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             function calculateScreenWaste(device, aspectRatio, deviceOrientation) {
+                // Determine effective pixel width and height based on orientation
+                let screenWidth = deviceOrientation === "landscape" ? device.width : device.height;
+                let screenHeight = deviceOrientation === "landscape" ? device.height : device.width;
+            
+                // Determine the effective width and height in pixels that maintains the aspect ratio
                 let effectiveWidth, effectiveHeight;
-                if (deviceOrientation === 'landscape') {
-                    effectiveWidth = device.width;
-                    effectiveHeight = device.width / aspectRatio;
-                    if (effectiveHeight > device.height) {
-                        effectiveHeight = device.height;
-                        effectiveWidth = device.height * aspectRatio;
-                    }
+                if (screenWidth / screenHeight > aspectRatio) {
+                    // Width is too wide for the given height to maintain the aspect ratio
+                    effectiveWidth = screenHeight * aspectRatio;
+                    effectiveHeight = screenHeight;
                 } else {
-                    effectiveHeight = device.height;
-                    effectiveWidth = device.height * aspectRatio;
-                    if (effectiveWidth > device.width) {
-                        effectiveWidth = device.width;
-                        effectiveHeight = device.width / aspectRatio;
-                    }
+                    // Height is too tall for the given width to maintain the aspect ratio
+                    effectiveWidth = screenWidth;
+                    effectiveHeight = screenWidth / aspectRatio;
                 }
-                const totalArea = device.width * device.height;
-                const usedArea = effectiveWidth * effectiveHeight;
-                const wasteArea = totalArea - usedArea;
-                return (wasteArea / totalArea) * 100;
+            
+                // Calculate the total screen area and the effective screen area
+                let totalArea = device.width * device.height;
+                let effectiveArea = effectiveWidth * effectiveHeight;
+            
+                // Calculate wasted area and the percentage of the screen that is wasted
+                let wastedArea = totalArea - effectiveArea;
+                let wastedPercentage = (wastedArea / totalArea) * 100;
+                return wastedPercentage;
             }
 
             deviceInputs.concat(useCaseInputs).forEach(id => {
