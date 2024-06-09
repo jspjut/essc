@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const useCases = {
         single_page: 1.55,
-        dual_page_portrait: 0.775,
+        dual_page_portrait: 1 / 1.29,
         dual_page_landscape: 1.29
     };
 

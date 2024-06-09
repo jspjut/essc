@@ -36,33 +36,34 @@ th {
     font-weight: bold;
 }
 
-input[type="text"] {
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: block;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 10px;
     width: 100%;
 }
 
-select {
+.dropdown-search {
+    display: none;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
+    margin-top: 5px;
 }
 
-.results {
-    margin-top: 30px;
-    text-align: center;
+.dropdown-content:focus + .dropdown-search {
+    display: block;
 }
 
-.results h2 {
-    color: #333;
-}
-
-.results p {
-    font-size: 18px;
-    color: #555;
+.dropdown-search:focus {
+    display: block;
 }
