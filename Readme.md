@@ -5,3 +5,9 @@ Most of the code was started by large language models (a mix of Perplexity Pro a
 If there's interest, maybe I'll share some of the prompt-response pairs.
 
 I'm happy to take contributions of other screen types or use cases in case there are any you care about.
+
+## Random notes
+
+* Standard American Comic books are about 6.625" x 10.25"
+* Digest size American Trade paperbacks are about 5.825" x 9.25", a reasonable lower-bound for comfortable text size.
+* By my math, digest trade paperbacks are about 90% font scale of full-sized comic books (9.25"/10.25" vertical).
