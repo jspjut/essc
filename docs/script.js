@@ -83,35 +83,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 // const cell2_2 = row2.insertCell();
                 // cell2_2.innerHTML = contentAspectRatio;
             
-                // const row6 = table.insertRow();
-                // const cell6_1 = row6.insertCell();
-                // cell6_1.innerHTML = 'Native Screen Size:';
-                // const cell6_2 = row6.insertCell();
-                // cell6_2.innerHTML = `${nativeScreenSize.toFixed(2)}"`;
-            
                 // const row3 = table.insertRow();
                 // const cell3_1 = row3.insertCell();
-                // cell3_1.innerHTML = 'Effective Screen Size:';
+                // cell3_1.innerHTML = 'Native Screen Size:';
                 // const cell3_2 = row3.insertCell();
-                // cell3_2.innerHTML = `${effectiveScreenSize.toFixed(2)}"`;
+                // cell3_2.innerHTML = `${nativeScreenSize.toFixed(2)}"`;
+            
+                const row4 = table.insertRow();
+                const cell4_1 = row4.insertCell();
+                cell4_1.innerHTML = 'Effective Screen Size:';
+                const cell4_2 = row4.insertCell();
+                cell4_2.innerHTML = `${effectiveScreenSize.toFixed(2)}"`;
             
                 const row5 = table.insertRow();
                 const cell5_1 = row5.insertCell();
                 cell5_1.innerHTML = 'Screen Waste:';
                 const cell5_2 = row5.insertCell();
                 cell5_2.innerHTML = `${screenWaste.toFixed(2)}%`;
-
+            
+                const row6 = table.insertRow();
+                const cell6_1 = row6.insertCell();
+                cell6_1.innerHTML = '10pt Font Size:';
+                const cell6_2 = row6.insertCell();
+                cell6_2.innerHTML = `${fontSize.pixels.toFixed(2)}px <br />${fontSize.physical.toFixed(1)}thou`;
+            
                 // const row7 = table.insertRow();
                 // const cell7_1 = row7.insertCell();
                 // cell7_1.innerHTML = '10pt Font 400DPI:';
                 // const cell7_2 = row7.insertCell();
                 // cell7_2.innerHTML = `${contentFontSize.pixels.toFixed(2)}dots <br />${contentFontSize.physical.toFixed(1)}thou`;
-            
-                // const row4 = table.insertRow();
-                // const cell4_1 = row4.insertCell();
-                // cell4_1.innerHTML = '10pt Font Size:';
-                // const cell4_2 = row4.insertCell();
-                // cell4_2.innerHTML = `${fontSize.pixels.toFixed(2)}px <br />${fontSize.physical.toFixed(1)}thou`;
             
                 const row8 = table.insertRow();
                 const cell8_1 = row8.insertCell();
