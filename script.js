@@ -200,8 +200,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     effectiveHeight = screenWidth / aspectRatio;
                 }
             
-                // Calculate the total screen area and the effective screen area
-                let totalArea = device.width * device.height;
+                // Calculate the total screen area based on orientation
+                let totalArea = screenWidth * screenHeight;
                 let effectiveArea = effectiveWidth * effectiveHeight;
             
                 // Calculate wasted area and the percentage of the screen that is wasted
@@ -209,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let wastedPercentage = (wastedArea / totalArea) * 100;
                 return wastedPercentage;
             }
+            
 
             deviceInputs.concat(useCaseInputs).forEach(id => {
                 document.getElementById(id).addEventListener('change', calculate);
