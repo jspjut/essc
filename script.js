@@ -58,7 +58,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 const effectiveScreenSize = calculateEffectiveScreenSize(device, useCase.aspectRatio, useCase.deviceOrientation);
                 const fontSize = calculateFontSize(device, useCase.aspectRatio, useCase.deviceOrientation);
                 const screenWaste = calculateScreenWaste(device, useCase.aspectRatio, useCase.deviceOrientation);
-                document.getElementById(resultId).innerHTML = `Effective Screen Size: ${effectiveScreenSize.toFixed(2)}"<br>10pt Font Size: ${fontSize.pixels.toFixed(2)}px (${fontSize.physical.toFixed(2)} inches)<br>Screen Waste: ${screenWaste.toFixed(2)}%`;
+                const deviceAspectRatio = calculateDeviceAspectRatio(device, useCase.deviceOrientation);
+                const contentAspectRatio = useCase.aspectRatio.toFixed(2);
+                document.getElementById(resultId).innerHTML = `
+                    Device Aspect Ratio: ${deviceAspectRatio}<br>
+                    Content Aspect Ratio: ${contentAspectRatio}<br>
+                    Effective Screen Size: ${effectiveScreenSize.toFixed(2)}"<br>
+                    10pt Font Size: ${fontSize.pixels.toFixed(2)}px (${fontSize.physical.toFixed(2)} inches)<br>
+                    Screen Waste: ${screenWaste.toFixed(2)}%
+                `;
+            }
+
+            function calculateDeviceAspectRatio(device, deviceOrientation) {
+                if (deviceOrientation === 'landscape') {
+                    return (device.width / device.height).toFixed(2);
+                } else {
+                    return (device.height / device.width).toFixed(2);
+                }
             }
 
             function calculateEffectiveScreenSize(device, aspectRatio, deviceOrientation) {
