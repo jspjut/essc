@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function updateResult(resultId, device, useCase) {
                 const effectiveScreenSize = calculateEffectiveScreenSize(device, useCase.aspectRatio, useCase.deviceOrientation);
-                const fontSize = calculateFontSize(device, useCase.aspectRatio, useCase.deviceOrientation);
+                const fontSize = calculate10ptFontSize(device, useCase.aspectRatio, useCase.deviceOrientation);
                 const screenWaste = calculateScreenWaste(device, useCase.aspectRatio, useCase.deviceOrientation);
                 const deviceAspectRatio = calculateDeviceAspectRatio(device, useCase.deviceOrientation);
                 const contentAspectRatio = useCase.aspectRatio.toFixed(2);
@@ -117,29 +117,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             function calculateEffectiveScreenSize(device, aspectRatio, deviceOrientation) {
-                let effectiveWidth, effectiveHeight;
-                if (deviceOrientation === 'portrait') {
-                    effectiveWidth = device.width;
-                    effectiveHeight = device.width / aspectRatio;
-                    if (effectiveHeight > device.height) {
-                        effectiveHeight = device.height;
-                        effectiveWidth = device.height * aspectRatio;
-                    }
+                // Determine effective pixel width and height based on orientation
+                let pixelWidth = deviceOrientation === "landscape" ? device.width : device.height;
+                let pixelHeight = deviceOrientation === "landscape" ? device.height : device.width;
+            
+                // Determine the effective width and height in pixels that maintains the aspect ratio
+                let effectiveWidth, effectiveEndHeight;
+                if (pixelWidth / pixelHeight > aspectRatio) {
+                    // Width is too wide for the given height to maintain the aspect ratio
+                    effectiveWidth = pixelHeight * aspectRatio;
+                    effectiveHeight = pixelHeight;
                 } else {
-                    effectiveHeight = device.height;
-                    effectiveWidth = device.height * aspectRatio;
-                    if (effectiveWidth > device.width) {
-                        effectiveWidth = device.width;
-                        effectiveHeight = device.width / aspectRatio;
-                    }
+                    // Height is too tall for the given width to maintain the aspect ratio
+                    effectiveWidth = pixelWidth;
+                    effectiveHeight = pixelWidth / aspectRatio;
                 }
-                const diagonalPixels = Math.sqrt(Math.pow(effectiveWidth, 2) + Math.pow(effectiveHeight, 2));
-                const diagonalInches = device.diagonal;
-                const pixelsPerInch = diagonalPixels / diagonalInches;
-                return Math.sqrt(Math.pow(effectiveWidth, 2) + Math.pow(effectiveHeight, 2)) / pixelsPerInch;
+            
+                // Calculate the diagonal in pixels using the Pythagorean theorem
+                let pixelDiagonal = Math.sqrt(effectiveWidth * effectiveWidth + effectiveHeight * effectiveHeight);
+            
+                // Convert pixel diagonal to inches
+                // Using the relationship derived from the device's full dimensions: pixelDiagonal / deviceDiagonal = pixelsPerInch
+                let fullPixelDiagonal = Math.sqrt(device.width * device.width + device.height * device.height);
+                let inchesDiagonal = device.diagonal * (pixelDiagonal / fullPixelDiagonal);
+            
+                return inchesDiagonal;
             }
 
-            function calculateFontSize(device, aspectRatio, deviceOrientation) {
+            function calculate10ptFontSize(device, aspectRatio, deviceOrientation) {
                 let effectiveHeight;
                 if (deviceOrientation === 'portrait') {
                     effectiveHeight = device.width / aspectRatio;

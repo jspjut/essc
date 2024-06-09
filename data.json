@@ -5,8 +5,8 @@
         { "id": "lenovo_duet_10", "name": "Lenovo Chromebook Duet 10.1\"", "width": 1920, "height": 1200, "diagonal": 10.1 }
     ],
     "useCases": [
-        { "id": "single_page", "name": "Single Page Superhero Comic", "aspectRatio": 1.55, "deviceOrientation": "portrait" },
-        { "id": "dual_page_portrait", "name": "Dual Page Portrait Superhero Comic", "aspectRatio": 0.775, "deviceOrientation": "portrait" },
-        { "id": "dual_page_landscape", "name": "Dual Page Landscape Superhero Comic", "aspectRatio": 0.775, "deviceOrientation": "landscape" }
+        { "id": "single_page", "name": "Single Page Superhero Comic", "aspectRatio": 0.645, "deviceOrientation": "portrait" },
+        { "id": "dual_page_portrait", "name": "Dual Page Portrait Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "portrait" },
+        { "id": "dual_page_landscape", "name": "Dual Page Landscape Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "landscape" }
     ]
 }
