@@ -144,25 +144,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 return inchesDiagonal;
             }
 
+            // TODO: this won't work without an original content size to base the 10pt font on...
             function calculate10ptFontSize(device, aspectRatio, deviceOrientation) {
-                let effectiveHeight;
-                if (deviceOrientation === 'portrait') {
-                    effectiveHeight = device.width / aspectRatio;
-                    if (effectiveHeight > device.height) {
-                        effectiveHeight = device.height;
-                    }
+                // Assume calculateEffectiveScreenSize is already defined and calculates the diagonal in inches
+                let effectiveInches = calculateEffectiveScreenSize(device, aspectRatio, deviceOrientation);
+            
+                // Calculate the total pixel dimensions based on the device orientation
+                let effectivePixelWidth = deviceOrientation === "landscape" ? device.width : device.height;
+                let effectivePixelHeight = deviceOrientation === "landscape" ? device.height : device.width;
+            
+                // Adjust effective pixel dimensions to maintain the aspect ratio
+                if ((effectivePixelWidth / effectivePixelHeight) > aspectRatio) {
+                    // Adjust width to fit the height
+                    effectivePixelWidth = effectivePixelHeight * aspectRatio;
                 } else {
-                    effectiveHeight = device.height;
-                    if (device.height * aspectRatio > device.width) {
-                        effectiveHeight = device.width / aspectRatio;
-                    }
+                    // Adjust height to fit the width
+                    effectivePixelHeight = effectivePixelWidth / aspectRatio;
                 }
-                const diagonalPixels = Math.sqrt(Math.pow(device.width, 2) + Math.pow(device.height, 2));
-                const diagonalInches = device.diagonal;
-                const pixelsPerInch = diagonalPixels / diagonalInches;
-                const fontSizePixels = (10 / 72) * 96 * (effectiveHeight / device.height) * pixelsPerInch / 96;
-                const fontSizeInches = (10 / 72) * (effectiveHeight / device.height) * (device.height / pixelsPerInch);
-                return { pixels: fontSizePixels, physical: fontSizeInches };
+            
+                // Calculate the diagonal of the content area in pixels
+                let effectivePixelDiagonal = Math.sqrt(effectivePixelWidth ** 2 + effectivePixelHeight ** 2);
+            
+                // Calculate the full diagonal in pixels
+                let fullPixelDiagonal = Math.sqrt(device.width ** 2 + device.height ** 2);
+            
+                // Calculate pixels per inch (PPI)
+                let pixelsPerInch = fullPixelDiagonal / device.diagonal;
+            
+                // Calculate the font size in pixels and in physical inches
+                const pointsToInches = 1 / 72;  // 1 point = 1/72 of an inch
+                let fontSizeInInches = 10 * pointsToInches;  // 10 points in inches
+                let fontSizeInPixels = fontSizeInInches * pixelsPerInch;  // Convert font size from inches to pixels
+            
+                // Return the result as an object
+                return {
+                    pixels: fontSizeInPixels,
+                    physical: fontSizeInInches
+                };
             }
 
             function calculateScreenWaste(device, aspectRatio, deviceOrientation) {
