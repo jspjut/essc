@@ -55,37 +55,77 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             function updateResult(resultId, device, useCase) {
-                const effectiveScreenSize = calculateEffectiveScreenSize(device, useCase.aspectRatio, useCase.orientation);
-                const fontSize = calculateFontSize(device, useCase.aspectRatio, useCase.orientation);
-                document.getElementById(resultId).innerHTML = `Effective Screen Size: ${effectiveScreenSize.toFixed(2)}"<br>10pt Font Size: ${fontSize.toFixed(2)}px`;
+                const effectiveScreenSize = calculateEffectiveScreenSize(device, useCase.aspectRatio, useCase.deviceOrientation);
+                const fontSize = calculateFontSize(device, useCase.aspectRatio, useCase.deviceOrientation);
+                const screenWaste = calculateScreenWaste(device, useCase.aspectRatio, useCase.deviceOrientation);
+                document.getElementById(resultId).innerHTML = `Effective Screen Size: ${effectiveScreenSize.toFixed(2)}"<br>10pt Font Size: ${fontSize.pixels.toFixed(2)}px (${fontSize.physical.toFixed(2)} inches)<br>Screen Waste: ${screenWaste.toFixed(2)}%`;
             }
 
-            function calculateEffectiveScreenSize(device, aspectRatio, orientation) {
+            function calculateEffectiveScreenSize(device, aspectRatio, deviceOrientation) {
                 let effectiveWidth, effectiveHeight;
-                if (orientation === 'landscape') {
+                if (deviceOrientation === 'landscape') {
                     effectiveWidth = device.width;
-                    effectiveHeight = device.height / aspectRatio;
+                    effectiveHeight = device.width / aspectRatio;
+                    if (effectiveHeight > device.height) {
+                        effectiveHeight = device.height;
+                        effectiveWidth = device.height * aspectRatio;
+                    }
                 } else {
-                    effectiveWidth = device.width / aspectRatio;
                     effectiveHeight = device.height;
+                    effectiveWidth = device.height * aspectRatio;
+                    if (effectiveWidth > device.width) {
+                        effectiveWidth = device.width;
+                        effectiveHeight = device.width / aspectRatio;
+                    }
                 }
-                const diagonalPixels = Math.sqrt(Math.pow(device.width, 2) + Math.pow(device.height, 2));
+                const diagonalPixels = Math.sqrt(Math.pow(effectiveWidth, 2) + Math.pow(effectiveHeight, 2));
                 const diagonalInches = device.diagonal;
                 const pixelsPerInch = diagonalPixels / diagonalInches;
                 return Math.sqrt(Math.pow(effectiveWidth, 2) + Math.pow(effectiveHeight, 2)) / pixelsPerInch;
             }
 
-            function calculateFontSize(device, aspectRatio, orientation) {
+            function calculateFontSize(device, aspectRatio, deviceOrientation) {
                 let effectiveHeight;
-                if (orientation === 'landscape') {
-                    effectiveHeight = device.height / aspectRatio;
+                if (deviceOrientation === 'landscape') {
+                    effectiveHeight = device.width / aspectRatio;
+                    if (effectiveHeight > device.height) {
+                        effectiveHeight = device.height;
+                    }
                 } else {
                     effectiveHeight = device.height;
+                    if (device.height * aspectRatio > device.width) {
+                        effectiveHeight = device.width / aspectRatio;
+                    }
                 }
                 const diagonalPixels = Math.sqrt(Math.pow(device.width, 2) + Math.pow(device.height, 2));
                 const diagonalInches = device.diagonal;
                 const pixelsPerInch = diagonalPixels / diagonalInches;
-                return (10 / 72) * 96 * (effectiveHeight / device.height) * pixelsPerInch / 96;
+                const fontSizePixels = (10 / 72) * 96 * (effectiveHeight / device.height) * pixelsPerInch / 96;
+                const fontSizeInches = (10 / 72) * (effectiveHeight / device.height) * (device.height / pixelsPerInch);
+                return { pixels: fontSizePixels, physical: fontSizeInches };
+            }
+
+            function calculateScreenWaste(device, aspectRatio, deviceOrientation) {
+                let effectiveWidth, effectiveHeight;
+                if (deviceOrientation === 'landscape') {
+                    effectiveWidth = device.width;
+                    effectiveHeight = device.width / aspectRatio;
+                    if (effectiveHeight > device.height) {
+                        effectiveHeight = device.height;
+                        effectiveWidth = device.height * aspectRatio;
+                    }
+                } else {
+                    effectiveHeight = device.height;
+                    effectiveWidth = device.height * aspectRatio;
+                    if (effectiveWidth > device.width) {
+                        effectiveWidth = device.width;
+                        effectiveHeight = device.width / aspectRatio;
+                    }
+                }
+                const totalArea = device.width * device.height;
+                const usedArea = effectiveWidth * effectiveHeight;
+                const wasteArea = totalArea - usedArea;
+                return (wasteArea / totalArea) * 100;
             }
 
             deviceInputs.concat(useCaseInputs).forEach(id => {
