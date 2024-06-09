@@ -1,12 +1,20 @@
 {
     "devices": [
-        { "id": "ipad_air_11", "name": "2024 iPad Air 11\"", "width": 2360, "height": 1640, "diagonal": 11 },
-        { "id": "ipad_pro_11", "name": "2024 iPad Pro 11\"", "width": 2420, "height": 1668, "diagonal": 11 },
-        { "id": "lenovo_duet_10", "name": "Lenovo Chromebook Duet 10.1\"", "width": 1920, "height": 1200, "diagonal": 10.1 }
+        { "id": "ipad_air_11", "name": "2024 iPad Air 11\"", "width": 2360, "height": 1640, "diagonal": 10.86 },
+        { "id": "ipad_pro_11", "name": "2024 iPad Pro 11\"", "width": 2420, "height": 1668, "diagonal": 11.1 },
+        { "id": "lenovo_duet_10", "name": "Lenovo Chromebook Duet 10.1\"", "width": 1920, "height": 1200, "diagonal": 10.1 },
+        { "id": "ipad_air_13", "name": "2024 iPad Air 13\"", "width": 2732, "height": 2048, "diagonal": 12.9 },
+        { "id": "ipad_pro_13", "name": "2024 iPad Pro 13\"", "width": 2752, "height": 2064, "diagonal": 13 }
     ],
     "useCases": [
         { "id": "single_page", "name": "Single Page Superhero Comic", "aspectRatio": 0.645, "deviceOrientation": "portrait" },
         { "id": "dual_page_portrait", "name": "Dual Page Portrait Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "portrait" },
-        { "id": "dual_page_landscape", "name": "Dual Page Landscape Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "landscape" }
+        { "id": "dual_page_landscape", "name": "Dual Page Landscape Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "landscape" },
+        { "id": "video_streaming_landscape", "name": "Video Streaming Landscape", "aspectRatio": 1.78, "deviceOrientation": "landscape" },
+        { "id": "cinemascope_filfilms_landscape", "name": "CinemaScope Films Landscape", "aspectRatio": 2.35, "deviceOrientation": "landscape" },
+        { "id": "imax_films_landscape", "name": "IMAX Films Landscape", "aspectRatio": 1.43, "testAspectRatio": [1.43, 1.9], "deviceOrientation": "landscape" },
+        { "id": "imax_films_landscape2", "name": "IMAX Films Landscape Digital", "aspectRatio": 1.9, "testAspectRatio": [1.43, 1.9], "deviceOrientation": "landscape" },
+        { "id": "vertical_videos_portrait", "name": "Vertical Videos Portrait", "aspectRatio": 0.5625, "deviceOrientation": "portrait" },
+        { "id": "standard_tv_landscape", "name": "Standard TV Shows Landscape", "aspectRatio": 1.33, "deviceOrientation": "landscape" }
     ]
 }

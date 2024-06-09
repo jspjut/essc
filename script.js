@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let pixelHeight = deviceOrientation === "landscape" ? device.height : device.width;
             
                 // Determine the effective width and height in pixels that maintains the aspect ratio
-                let effectiveWidth, effectiveEndHeight;
+                let effectiveWidth, effectiveHeight;
                 if (pixelWidth / pixelHeight > aspectRatio) {
                     // Width is too wide for the given height to maintain the aspect ratio
                     effectiveWidth = pixelHeight * aspectRatio;
@@ -144,22 +144,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 return inchesDiagonal;
             }
 
-            // TODO: this won't work without an original content size to base the 10pt font on...
             function calculate10ptFontSize(device, aspectRatio, deviceOrientation) {
                 // Assume calculateEffectiveScreenSize is already defined and calculates the diagonal in inches
                 let effectiveInches = calculateEffectiveScreenSize(device, aspectRatio, deviceOrientation);
             
                 // Calculate the total pixel dimensions based on the device orientation
-                let effectivePixelWidth = deviceOrientation === "landscape" ? device.width : device.height;
-                let effectivePixelHeight = deviceOrientation === "landscape" ? device.height : device.width;
+                let screenWidth = deviceOrientation === "landscape" ? device.width : device.height;
+                let screenHeight = deviceOrientation === "landscape" ? device.height : device.width;
             
                 // Adjust effective pixel dimensions to maintain the aspect ratio
-                if ((effectivePixelWidth / effectivePixelHeight) > aspectRatio) {
+                let effectivePixelWidth, effectivePixelHeight;
+                if ((screenWidth / screenHeight) > aspectRatio) {
                     // Adjust width to fit the height
-                    effectivePixelWidth = effectivePixelHeight * aspectRatio;
+                    effectivePixelWidth = screenHeight * aspectRatio;
+                    effectivePixelHeight = screenHeight;
                 } else {
                     // Adjust height to fit the width
-                    effectivePixelHeight = effectivePixelWidth / aspectRatio;
+                    effectivePixelWidth = screenWidth;
+                    effectivePixelHeight = screenWidth / aspectRatio;
                 }
             
                 // Calculate the diagonal of the content area in pixels
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Calculate the full diagonal in pixels
                 let fullPixelDiagonal = Math.sqrt(device.width ** 2 + device.height ** 2);
             
-                // Calculate pixels per inch (PPI)
+                // Calculate pixels per inch (PPI) based on the full physical device diagonal
                 let pixelsPerInch = fullPixelDiagonal / device.diagonal;
             
                 // Calculate the font size in pixels and in physical inches
@@ -209,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 let wastedPercentage = (wastedArea / totalArea) * 100;
                 return wastedPercentage;
             }
-            
 
             deviceInputs.concat(useCaseInputs).forEach(id => {
                 document.getElementById(id).addEventListener('change', calculate);
