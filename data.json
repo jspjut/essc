@@ -7,9 +7,9 @@
         { "id": "ipad_pro_13", "name": "2024 iPad Pro 13\"", "width": 2752, "height": 2064, "diagonal": 13 }
     ],
     "useCases": [
-        { "id": "single_page", "name": "Single Page Superhero Comic", "aspectRatio": 0.645, "deviceOrientation": "portrait" },
-        { "id": "dual_page_portrait", "name": "Dual Page Portrait Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "portrait" },
-        { "id": "dual_page_landscape", "name": "Dual Page Landscape Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "landscape" },
+        { "id": "single_page", "name": "Single Page Superhero Comic", "aspectRatio": 0.645, "deviceOrientation": "portrait", "tenptSizeRatio": 0.0132275 },
+        { "id": "dual_page_portrait", "name": "Dual Page Portrait Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "portrait", "tenptSizeRatio": 0.0132275  },
+        { "id": "dual_page_landscape", "name": "Dual Page Landscape Superhero Comic", "aspectRatio": 1.29, "deviceOrientation": "landscape", "tenptSizeRatio": 0.0132275  },
         { "id": "video_streaming_landscape", "name": "Video Streaming Landscape", "aspectRatio": 1.78, "deviceOrientation": "landscape" },
         { "id": "cinemascope_filfilms_landscape", "name": "CinemaScope Films Landscape", "aspectRatio": 2.35, "deviceOrientation": "landscape" },
         { "id": "imax_films_landscape", "name": "IMAX Films Landscape", "aspectRatio": 1.43, "testAspectRatio": [1.43, 1.9], "deviceOrientation": "landscape" },

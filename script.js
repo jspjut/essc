@@ -56,11 +56,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function updateResult(resultId, device, useCase) {
                 const effectiveScreenSize = calculateEffectiveScreenSize(device, useCase.aspectRatio, useCase.deviceOrientation);
-                const fontSize = calculate10ptFontSize(device, useCase.aspectRatio, useCase.deviceOrientation);
                 const screenWaste = calculateScreenWaste(device, useCase.aspectRatio, useCase.deviceOrientation);
                 const deviceAspectRatio = calculateDeviceAspectRatio(device, useCase.deviceOrientation);
                 const contentAspectRatio = useCase.aspectRatio.toFixed(2);
                 const nativeScreenSize = device.diagonal;
+                const fontSize = calculate10ptFontSize(device, useCase);
+                const contentFontSize = useCase.tenptSizeRatio * 10.5;
             
                 const resultContainer = document.getElementById(resultId);
                 resultContainer.innerHTML = ''; // Clear previous content
@@ -97,12 +98,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell5_1.innerHTML = 'Screen Waste:';
                 const cell5_2 = row5.insertCell();
                 cell5_2.innerHTML = `${screenWaste.toFixed(2)}%`;
+
+                const row7 = table.insertRow();
+                const cell7_1 = row7.insertCell();
+                cell7_1.innerHTML = '10pt Font 400DPI:';
+                const cell7_2 = row7.insertCell();
+                cell7_2.innerHTML = `${(contentFontSize*400).toFixed(2)}dots <br />${(contentFontSize*1000).toFixed(1)}thou`;
             
-                // const row4 = table.insertRow();
-                // const cell4_1 = row4.insertCell();
-                // cell4_1.innerHTML = '10pt Font Size:';
-                // const cell4_2 = row4.insertCell();
-                // cell4_2.innerHTML = `${fontSize.pixels.toFixed(2)}px <br />${fontSize.physical.toFixed(2)}"`;
+                const row4 = table.insertRow();
+                const cell4_1 = row4.insertCell();
+                cell4_1.innerHTML = '10pt Font Size:';
+                const cell4_2 = row4.insertCell();
+                cell4_2.innerHTML = `${fontSize.pixels.toFixed(2)}px <br />${fontSize.physical.toFixed(1)}thou`;
             
                 resultContainer.appendChild(table);
             }
@@ -144,44 +151,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 return inchesDiagonal;
             }
 
-            function calculate10ptFontSize(device, aspectRatio, deviceOrientation) {
+            function calculate10ptFontSize(device, useCase) {
                 // Assume calculateEffectiveScreenSize is already defined and calculates the diagonal in inches
-                let effectiveInches = calculateEffectiveScreenSize(device, aspectRatio, deviceOrientation);
+                let effectiveInches = calculateEffectiveScreenSize(device, useCase.aspectRatio, useCase.deviceOrientation);
             
                 // Calculate the total pixel dimensions based on the device orientation
-                let screenWidth = deviceOrientation === "landscape" ? device.width : device.height;
-                let screenHeight = deviceOrientation === "landscape" ? device.height : device.width;
+                let screenWidth = useCase.deviceOrientation === "landscape" ? device.width : device.height;
+                let screenHeight = useCase.deviceOrientation === "landscape" ? device.height : device.width;
             
                 // Adjust effective pixel dimensions to maintain the aspect ratio
-                let effectivePixelWidth, effectivePixelHeight;
-                if ((screenWidth / screenHeight) > aspectRatio) {
+                let effectivePixelHeight;
+                if ((screenWidth / screenHeight) > useCase.aspectRatio) {
                     // Adjust width to fit the height
-                    effectivePixelWidth = screenHeight * aspectRatio;
                     effectivePixelHeight = screenHeight;
                 } else {
                     // Adjust height to fit the width
-                    effectivePixelWidth = screenWidth;
-                    effectivePixelHeight = screenWidth / aspectRatio;
+                    effectivePixelHeight = screenWidth / useCase.aspectRatio;
                 }
-            
-                // Calculate the diagonal of the content area in pixels
-                let effectivePixelDiagonal = Math.sqrt(effectivePixelWidth ** 2 + effectivePixelHeight ** 2);
             
                 // Calculate the full diagonal in pixels
                 let fullPixelDiagonal = Math.sqrt(device.width ** 2 + device.height ** 2);
             
                 // Calculate pixels per inch (PPI) based on the full physical device diagonal
                 let pixelsPerInch = fullPixelDiagonal / device.diagonal;
-            
-                // Calculate the font size in pixels and in physical inches
-                const pointsToInches = 1 / 72;  // 1 point = 1/72 of an inch
-                let fontSizeInInches = 10 * pointsToInches;  // 10 points in inches
-                let fontSizeInPixels = fontSizeInInches * pixelsPerInch;  // Convert font size from inches to pixels
+
+                let fontSizeInPixels = effectivePixelHeight * useCase.tenptSizeRatio;
+                let fontSizeInThou = fontSizeInPixels / pixelsPerInch * 1000;
             
                 // Return the result as an object
                 return {
                     pixels: fontSizeInPixels,
-                    physical: fontSizeInInches
+                    physical: fontSizeInThou
                 };
             }
 
