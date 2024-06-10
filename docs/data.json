@@ -2,7 +2,8 @@
     "devices": [
         { "id": "ipad_pro_11_7", "name": "iPad Pro 11\" (7th gen)", "width": 2420, "height": 1668, "diagonal": 11.1 },
         { "id": "ipad_air_11_6", "name": "iPad Air 11\" (6th gen)", "width": 2360, "height": 1640, "diagonal": 10.86 },
-        { "id": "lenovo_duet_10", "name": "Lenovo Chromebook Duet 10.1\"", "width": 1920, "height": 1200, "diagonal": 10.1 },
+        { "id": "lenovo_duet_10", "name": "Chromebook Duet 10.1\" Lenovo", "width": 1920, "height": 1200, "diagonal": 10.1 },
+        { "id": "lenovo_duet_11", "name": "Chromebook Duet 3 (11\") Lenovo", "width": 2000, "height": 1200, "diagonal": 10.95 },
         { "id": "ipad_air_13_6", "name": "iPad Air 13\" (6th gen)", "width": 2732, "height": 2048, "diagonal": 12.9 },
         { "id": "ipad_pro_13_7", "name": "iPad Pro 13\" (7th gen)", "width": 2752, "height": 2064, "diagonal": 13 }
     ],
